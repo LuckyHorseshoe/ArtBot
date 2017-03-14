@@ -18,7 +18,7 @@ def send_art(chat_id):
     N = 10
     while True:
         for pic in Search().sort_by(sort.SCORE).limit(N)\
-                .query("first_seen_at.gt:30 days ago", "safe", "-animated", "-comic", "-screencap"):
+                .query("first_seen_at.gt:30 days ago", "safe", "-animated", "-comic", "-screencap", "-anthro"):
             if pic.id not in bayan_ids:
                 bot.send_photo(chat_id, pic.large)
                 with open(BAYANS, 'a') as b:
@@ -40,7 +40,7 @@ def informer(message):
 def hibonicus_detector(message):
     informer(message)
     print("Hibonicus detector activated!")
-    if message.from_user.id in (235098742, 256490925):
+    if message.from_user.id == 256490925:
         send_art(message.chat.id)
     else:
         print("Not Hibonicus, false alarm!")
